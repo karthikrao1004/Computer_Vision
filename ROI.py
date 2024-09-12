@@ -1,15 +1,15 @@
 import cv2
 
-image = cv2.imread('C:\Users\akhil\OneDrive\Desktop\bike.jpeg')
+image_path = r"C:\Users\karth\OneDrive\Desktop\CV\A.jpeg"
+image = cv2.imread(image_path)
 
-x, y, w, h = 50, 50, 100, 100  # Example values
+roi_x, roi_y, roi_w, roi_h = 100, 100, 200, 200
+roi = image[roi_y:roi_y + roi_h, roi_x:roi_x + roi_w]
 
-fill_color = (0, 0, 255)  # Red
+pasted_image = image.copy()
+pasted_image[roi_y:roi_y + roi_h, roi_x:roi_x + roi_w] = roi
 
-image[y:y+h, x:x+w] = fill_color
-
-cv2.imshow('Modified Image', image)
+cv2.imshow('Original Image', image)
+cv2.imshow('Pasted Image', pasted_image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
-cv2.imwrite('modified_image.jpg', image)
